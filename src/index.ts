@@ -10,9 +10,11 @@ import path from 'path';
 // import { fileURLToPath } from 'url';
 
 import { register } from './controllers/AuthController';
+import { createPost } from './controllers/PostController';
 import { verifyToken } from './middleware/auth';
 
 import authRoutes from './routes/AuthRoute';
+import postRoutes from './routes/PostRoute';
 
 // CONFIGURATION
 const _filename = path.resolve(
@@ -53,9 +55,11 @@ const upload = multer({ storage });
 
 // ROUTE WITH FILES
 app.post('/auth/register', upload.single('picture'), register);
+app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 // ROUTES
 app.use('/auth', authRoutes);
+app.use('/posts', postRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;
