@@ -7,9 +7,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
+// import { fileURLToPath } from 'url';
 
-import User from './models/User';
-import Post from './models/Post';
+import { register } from './controllers/AuthController';
+import { verifyToken } from './middleware/auth';
+
+import authRoutes from './routes/AuthRoute';
 
 // CONFIGURATION
 const _filename = path.resolve(
@@ -48,6 +51,12 @@ const storage: StorageEngine = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// ROUTE WITH FILES
+app.post('/auth/register', upload.single('picture'), register);
+
+// ROUTES
+app.use('/auth', authRoutes);
+
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;
 
@@ -64,7 +73,10 @@ mongoose
 	.connect(process.env.MONGO_URL, options)
 	.then(() => {
 		app.listen(PORT, () => {
-			console.log(`Server is running on port ${PORT}`);
+			console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 		});
+		// ADD DATA ONE TIME
+		// User.insertMany(users);
+		// Post.insertMany(posts);
 	})
 	.catch((error: any) => console.log(`${error}: did not connect`));
