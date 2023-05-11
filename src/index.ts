@@ -13,6 +13,7 @@ import { register } from './controllers/AuthController';
 import { verifyToken } from './middleware/auth';
 
 import authRoutes from './routes/AuthRoute';
+import userRoutes from './routes/UserRoute';
 
 // CONFIGURATION
 const _filename = path.resolve(
@@ -56,6 +57,7 @@ app.post('/auth/register', upload.single('picture'), register);
 
 // ROUTES
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;
