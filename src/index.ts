@@ -7,6 +7,9 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
+import User from './models/User';
+import Post from './models/Post';
+import { users,posts } from './data/index';
 // import { fileURLToPath } from 'url';
 
 import { register } from './controllers/AuthController';
@@ -76,7 +79,7 @@ mongoose
 			console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 		});
 		// ADD DATA ONE TIME
-		// User.insertMany(users);
-		// Post.insertMany(posts);
+		User.insertMany(users);
+		Post.insertMany(posts);
 	})
 	.catch((error: any) => console.log(`${error}: did not connect`));
