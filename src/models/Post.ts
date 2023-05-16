@@ -1,37 +1,25 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const PostSchema = new Schema(
+const PostSchema = new mongoose.Schema(
 	{
 		userId: {
 			type: String,
 			required: true,
 		},
-		firstName: {
+		desc: {
 			type: String,
-			required: true,
+			max: 500,
 		},
-		lastName: {
+		img: {
 			type: String,
-			required: true,
 		},
-		location: String,
-		userPicturePath: String,
-		descripton: String,
-		picturePath: String,
 		likes: {
-			type: Map,
-			of: Boolean,
-		},
-		comments: {
 			type: Array,
 			default: [],
 		},
 	},
-	{
-		timestamps: true,
-	}
+	{ timestamps: true }
 );
 
-const Post = model('post', PostSchema);
-
+const Post = mongoose.model('post', PostSchema);
 export default Post;

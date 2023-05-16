@@ -1,88 +1,42 @@
-import express, { Request, Response, NextFunction } from 'express';
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
+import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import multer, { StorageEngine } from 'multer';
-import path from 'path';
-// import { fileURLToPath } from 'url';
+import cors from 'cors';
 
-import { register } from './controllers/AuthController';
-import { createPost } from './controllers/PostController';
-import { verifyToken } from './middleware/auth';
+import authRoute from './routes/AuthRoute';
+import userRoute from './routes/UserRoute';
+import postRoute from './routes/PostRoute';
+import exp from 'constants';
 
-import authRoutes from './routes/AuthRoute';
-import userRoutes from './routes/UserRoute';
-import postRoutes from './routes/PostRoute';
-
-// CONFIGURATION
-const _filename = path.resolve(
-	path.dirname(require.resolve(process.argv[1])),
-	process.argv[1]
-);
-const _dirname = path.dirname(_filename);
-
-dotenv.config();
 const app = express();
+dotenv.config();
+
+//middleware
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
-app.use(bodyParser.json({ limit: '30mb', inflate: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
-app.use('/assets', express.static(path.join(_dirname, 'public/assets')));
 
-// FILE STORAGE
-const storage: StorageEngine = multer.diskStorage({
-	destination: (
-		req: Request,
-		file: Express.Multer.File,
-		cb: (error: Error | null, destination: string) => void
-	): void => {
-		cb(null, 'public/assets');
-	},
-	filename: (
-		req: Request,
-		file: Express.Multer.File,
-		cb: (error: Error | null, filename: string) => void
-	): void => {
-		cb(null, file.originalname);
-	},
-});
-const upload = multer({ storage });
+app.use('/api/auth', authRoute);
+app.use('/api/users', userRoute);
+app.use('/api/posts', postRoute);
 
-// ROUTE WITH FILES
-app.post('/auth/register', upload.single('picture'), register);
-app.post('/posts', verifyToken, upload.single('picture'), createPost);
+// mongo setup
+const PORT = process.env.PORT;
 
-// ROUTES
-app.use('/auth', authRoutes);
-app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
-
-// MONGOOSE SETUP
-const PORT = process.env.PORT || 6001;
-
-if (!process.env.MONGO_URL) {
-	throw new Error('MONGO_URL is not defined in the environment variables');
-}
-
-const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-} as any;
+const options:any = { useNewUrlParser: true, useUnifiedTopology: true };
 
 mongoose
-	.connect(process.env.MONGO_URL, options)
+	.connect(process.env.MONGO_URL!, options)
 	.then(() => {
+		console.log('connected to mongo database');
 		app.listen(PORT, () => {
 			console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 		});
-		// ADD DATA ONE TIME
-		// User.insertMany(users);
-		// Post.insertMany(posts);
 	})
-	.catch((error: any) => console.log(`${error}: did not connect`));
+	.catch((error: any) => {
+		console.log(`${error}: did not connect`);
+	});
