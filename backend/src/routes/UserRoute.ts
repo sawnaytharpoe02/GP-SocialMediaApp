@@ -1,18 +1,20 @@
-import express from 'express';
+import { Router } from 'express';
 import {
+	deleteUser,
+	updateUser,
 	getUser,
-	getUserFriends,
-	addRemoveFriend,
+	followUser,
+	unfollowUser,
 } from '../controllers/UserController';
-import { verifyToken } from '../middleware/auth.js';
+import { verifyToken } from '../middleware/auth';
+const router = Router();
 
-const router = express.Router();
+router.route('/:id').get(getUser).put(verifyToken, updateUser).delete(verifyToken, deleteUser);
 
-// READ
-router.get('/:id', verifyToken, getUser);
-router.get('/:id/friends', verifyToken, getUserFriends);
+//follow a user
+router.put('/:id/follow', followUser);
 
-// UPDATE
-router.patch('/:id/:friendId', verifyToken, addRemoveFriend);
+//unfollow a user
+router.put('/:id/unfollow', unfollowUser);
 
 export default router;
