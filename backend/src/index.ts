@@ -8,7 +8,6 @@ import cors from 'cors';
 import authRoute from './routes/AuthRoute';
 import userRoute from './routes/UserRoute';
 import postRoute from './routes/PostRoute';
-import exp from 'constants';
 
 const app = express();
 dotenv.config();
