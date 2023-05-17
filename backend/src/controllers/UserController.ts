@@ -45,8 +45,13 @@ const deleteUser = async (req: Request, res: Response) => {
 
 // GET USER
 const getUser = async (req: Request, res: Response) => {
+	const userId = req.query.userId;
+	const username = req.query.username;
 	try {
-		const user : any = await User.findById(req.params.id);
+		const user: any = userId
+			? await User.findById(userId)
+			: await User.findOne({ username: username });
+
 		const { password, updatedAt, ...other } = user._doc;
 		res.status(200).json(other);
 	} catch (err) {
@@ -59,8 +64,8 @@ const followUser = async (req: Request, res: Response) => {
 	const { userId } = req.body; // this is my userId
 	if (userId !== req.params.id) {
 		try {
-			const user : any = await User.findById(req.params.id);
-			const currentUser : any = await User.findById(userId);
+			const user: any = await User.findById(req.params.id);
+			const currentUser: any = await User.findById(userId);
 
 			if (!user.followers.includes(userId)) {
 				await user.updateOne({ $push: { followers: userId } });

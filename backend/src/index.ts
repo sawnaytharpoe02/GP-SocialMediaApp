@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
+import fileUpload from 'express-fileupload';
 
 import authRoute from './routes/AuthRoute';
 import userRoute from './routes/UserRoute';
@@ -14,10 +15,12 @@ dotenv.config();
 
 //middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan('common'));
 app.use(cors());
+app.use(fileUpload());
+app.use(express.static('uploads'));
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
@@ -26,7 +29,7 @@ app.use('/api/posts', postRoute);
 // mongo setup
 const PORT = process.env.PORT;
 
-const options:any = { useNewUrlParser: true, useUnifiedTopology: true };
+const options: any = { useNewUrlParser: true, useUnifiedTopology: true };
 
 mongoose
 	.connect(process.env.MONGO_URL!, options)
