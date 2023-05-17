@@ -32,14 +32,14 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
 	try {
 		const { email, password } = req.body;
-		const user = await User.findOne({ email });
+		const user: any = await User.findOne({ email });
 		if (!user) return res.status(404).json('user not found');
 
 		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) return res.status(404).json({ msg: 'Invalid credentials' });
 
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
-		// delete user.password;
+		delete user.password;
 
 		res.status(200).json({ token, user });
 	} catch (err: any) {
@@ -48,13 +48,13 @@ const login = async (req: Request, res: Response) => {
 };
 
 // LOGGED OUT
-const logout = async (req : any,res : Response) => {
+const logout = async (req: any, res: Response) => {
 	try {
 		req.session = null;
-		res.status(200).json({message : "Logout Successfully"})
-	} catch (err : any) {
+		res.status(200).json({ message: 'Logout Successfully' });
+	} catch (err: any) {
 		res.status(500).json({ error: err.message });
 	}
 };
 
-export { register, login,logout };
+export { register, login, logout };

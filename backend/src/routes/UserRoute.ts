@@ -9,7 +9,13 @@ import {
 import { verifyToken } from '../middleware/auth';
 const router = Router();
 
-router.route('/:id').get(getUser).put(verifyToken, updateUser).delete(verifyToken, deleteUser);
+//query a user
+router.get('/', getUser);
+
+router
+	.route('/:id')
+	.put(verifyToken, updateUser)
+	.delete(verifyToken, deleteUser);
 
 //follow a user
 router.put('/:id/follow', followUser);
