@@ -1,6 +1,6 @@
 .homeContainer {
-  display: flex;
-  width: 100%;
-  background-color: var(--background-color);
-  margin-top: 68px;
+	display: flex;
+	width: 100%;
+	background-color: var(--background-color);
+	margin-top: 68px;
 }

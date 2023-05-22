@@ -1,113 +1,106 @@
-.post {
+.share {
 	width: 100%;
-	margin: 30px 0;
+	height: 170px;
+	border-radius: 10px;
 	-webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 	box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 	background-color: var(--contrast-color);
 	color: var(--primary-text-color);
-	border-radius: 10px;
 }
 
-.postWrapper {
+.shareWrapper {
 	padding: 10px;
 }
 
-.postTop {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.postTopLeft {
+.shareTop {
 	display: flex;
 	align-items: center;
 }
 
-.postProfileImg {
-	width: 32px;
-	height: 32px;
+.shareProfileImg {
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 	object-fit: cover;
+	margin-right: 10px;
 }
 
-.postUsername {
-	margin: 0 10px;
-	font-size: 15px;
+.shareInput {
+	border: none;
+	width: 80%;
+	background: transparent;
+	color: #fff;
+}
+
+.shareInput:focus {
+	outline: none;
+}
+
+.shareHr {
+	margin: 20px;
+}
+
+.shareBottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.shareOptions {
+	display: flex;
+	margin-left: 20px;
+}
+
+.shareOption {
+	display: flex;
+	align-items: center;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.shareIcon {
+	font-size: 18px;
+	margin-right: 3px;
+}
+
+.shareOptionText {
+	font-size: 14px;
 	font-weight: 500;
 }
 
-.postDate {
-	color: var(--secondary-text-color);
-	font-size: 12px;
-}
-
-.postCenter {
-	margin: 20px 0;
-}
-
-.postImg {
-	width: 100%;
-	margin-top: 20px;
-	max-height: 500px;
-	object-fit: contain;
-}
-
-.postBottom {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.postBottomLeft {
-	display: flex;
-	align-items: center;
-}
-
-.likeIcon {
-	width: 24px;
-	height: 24px;
-	margin-right: 5px;
+.shareButton {
+	border: none;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: var(--button-color);
+	font-weight: 500;
+	margin-right: 20px;
 	cursor: pointer;
+	color: white;
 }
 
-.postLikeCounter {
-	font-size: 15px;
-}
-
-.postCommentText {
-	font-size: 15px;
-	cursor: pointer;
-	border-bottom: 1px dashed gray;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1160px) {
-	.post {
-		margin: 10px 0;
+@media screen and (min-width: 767.9px) and (max-width: 1160px) {
+	.share {
+		height: 150px;
 	}
 
-	.postCenter {
-		margin: 10px 0;
+	.shareHr {
+		margin: 15px;
 	}
 
-	.likeIcon {
-		width: 22px;
-		height: 22px;
+	.shareOptions {
+		margin-left: 4px;
 	}
 
-	.postLikeCounter {
-		font-size: 15px;
+	.shareOptionText {
+		font-size: 11px;
+		font-weight: 500;
 	}
 
-	.postCommentText {
-		font-size: 15px;
-		cursor: pointer;
-		border-bottom: 1px dashed gray;
-	}
-}
-
-/* mobile */
-@media screen and (min-width: 320px) and (max-width: 767.9px) {
-	.post {
-		margin: 10px 0;
+	.shareProfileImg {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		margin-right: 10px;
 	}
 }

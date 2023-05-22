@@ -1,79 +1,92 @@
 .sidebar {
-  position: sticky;
-  top: 50px;
-  flex: 3;
-  height: calc(100vh - 50px);
-  background-color: var(--background-color);
-  color: var(--primary-text-color);
-  overflow-y: scroll;
+	flex: 3;
+	height: calc(100vh - 50px);
+	overflow-y: scroll;
+	position: sticky;
+	top: 50px;
+	background-color: var(--background-color);
+	color: var(--primary-text-color);
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+	background-color: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(179, 179, 179);
+	background-color: rgb(179, 179, 179);
 }
 
 .sidebarWrapper {
-  padding: 20px;
+	padding: 20px;
 }
 
 .sidebarList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
 .sidebarListItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
 .sidebarIcon {
-  margin-right: 15px;
+	margin-right: 15px;
 }
 
 .sidebarButton {
-  width: 150px;
-  padding: 10px;
-  border: none;
-  background-color: var(--button-color);
-  color: var(--primary-text-color);
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 5px;
+	width: 150px;
+	border: none;
+	padding: 10px;
+	border-radius: 5px;
+	font-weight: 500;
+	color: var(--primary-text-color);
+	background-color: var(--button-color);
+	cursor: pointer;
 }
 
 .sidebarHr {
-  margin: 20px 0;
+	margin: 20px 0;
 }
 
 .sidebarFriendList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
-/*Ipad*/
 @media screen and (min-width: 768px) and (max-width: 1160px) {
+	.sidebar {
+		flex: none;
+		width: 24%;
+		height: calc(100vh - 50px);
+		overflow-y: scroll;
+		position: sticky;
+		top: 50px;
+		background-color: var(--background-color);
+		color: var(--primary-text-color);
+	}
 
-  .sidebar {
-    flex: none;
-    width: 24%;
-  }
-
+	.sidebarButton {
+		width: 100px;
+		border: none;
+		padding: 10px;
+		border-radius: 5px;
+		font-weight: 500;
+		color: var(--primary-text-color);
+		background-color: var(--button-color);
+		cursor: pointer;
+	}
 }
 
-/* mobile */
 @media screen and (min-width: 320px) and (max-width: 767.9px) {
-  .sidebar {
-    display: none;
-  }
+	.sidebar {
+		display: none;
+	}
 }
