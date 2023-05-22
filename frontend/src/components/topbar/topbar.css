@@ -65,6 +65,7 @@
 
 .topbarIcons {
   display: flex;
+  gap: 10px;
 }
 
 .topbarIconItem {
@@ -98,18 +99,22 @@
 
 /*Ipad*/
 @media screen and (min-width: 768px) and (max-width: 1160px) {
-
   .searchbar {
     width: 95%;
   }
-
 }
 
 /*mobile */
 @media screen and (min-width: 320px) and (max-width: 767.9px) {
-
   .topbarCenter {
     display: none;
   }
 
+  .topbarLink {
+    display: none;
+  }
+
+  .topbarIcons {
+    gap: 0;
+  }
 }
