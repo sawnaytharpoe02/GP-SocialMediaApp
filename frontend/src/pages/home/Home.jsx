@@ -4,15 +4,15 @@ import Feed from '../../components/feed/Feed';
 import './home.css';
 
 const Home = () => {
-	return (
-		<>
-			<Topbar />
-			<div className="homeContainer">
-				<Sidebar />
-				<Feed />
-			</div>
-		</>
-	);
+  return (
+    <>
+      <Topbar />
+      <div className="homeContainer">
+        <Sidebar />
+        <Feed />
+      </div>
+    </>
+  );
 };
 
 export default Home;

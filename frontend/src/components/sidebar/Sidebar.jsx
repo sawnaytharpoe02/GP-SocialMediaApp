@@ -1,4 +1,4 @@
-import "./sidebar.css";
+import './sidebar.css';
 import {
   RssFeed,
   Chat,
@@ -9,7 +9,7 @@ import {
   Event,
   School,
   WorkOutline,
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 
 export default function Sidebar() {
   return (
