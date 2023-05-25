@@ -1,26 +1,25 @@
 import { Router } from 'express';
 import {
-	createPost,
-	getPost,
-	getUserPosts,
-	updatePost,
-	deletePost,
-	likeDislikePost,
-	getTimelinePosts,
+  createPost,
+  getPost,
+  getUserPosts,
+  updatePost,
+  deletePost,
+  likeDislikePost,
+  getTimelinePosts,
 } from '../controllers/PostController';
 import { verifyToken } from '../middleware/auth';
-import { uploadSingleFile } from '../middleware/upload';
 
 const router = Router();
 
 //create a post
-router.post('/', [verifyToken, uploadSingleFile, createPost]);
+router.post('/', [verifyToken, createPost]);
 
 router
-	.route('/:id')
-	.get(getPost)
-	.put([verifyToken, updatePost])
-	.delete([verifyToken, deletePost]);
+  .route('/:id')
+  .get(getPost)
+  .put([verifyToken, updatePost])
+  .delete([verifyToken, deletePost]);
 
 //like / dislike a post
 router.put('/:id/like', likeDislikePost);

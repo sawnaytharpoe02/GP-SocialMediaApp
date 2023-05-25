@@ -1,6 +1,5 @@
 .share {
   width: 100%;
-  height: 170px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -79,9 +78,28 @@
   color: white;
 }
 
+.shareImgContainer {
+  padding: 0 20px 10px 20px;
+  position: relative;
+}
+
+.shareImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.shareCancelImg {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  cursor: pointer;
+  color: var(--background-color);
+  opacity: .7;
+}
+
 @media screen and (min-width: 767.9px) and (max-width: 1160px) {
   .share {
-    height: 150px;
+    height: auto;
   }
 
   .shareHr {

@@ -52,15 +52,19 @@
 .topbarRight {
   display: flex;
   flex: 4;
-  justify-content: space-around;
+  justify-content: end;
+  padding-right: 30px;
   align-items: center;
   color: white;
 }
 
 .topbarLink {
-  margin-right: 10px;
-  font-size: 14px;
+  margin-right: 40px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #fff;
   cursor: pointer;
+
 }
 
 .topbarIcons {
@@ -92,6 +96,7 @@
 .topbarImg {
   width: 32px;
   height: 32px;
+  margin-left: 10px;
   cursor: pointer;
   border-radius: 50%;
   object-fit: cover;
@@ -108,19 +113,21 @@
 @media screen and (min-width: 320px) and (max-width: 767.9px) {
   .logo {
     font-size: 26px;
-}
+  }
 
-.cmnButton {
-  padding: 7px;
-  border-radius: 5px;
-  margin-right: 0px;
-}
+  .cmnButton {
+    padding: 7px;
+    border-radius: 5px;
+    margin-right: 0px;
+  }
 
-.topbarImg {
-  width: 34px;
-  height: 34px;
-  margin-right: 5px;
-}
+  .topbarImg {
+    width: 34px;
+    height: 34px;
+    margin-left: 0;
+    margin-right: 5px;
+  }
+
   .topbarCenter {
     display: none;
   }
@@ -128,8 +135,10 @@
   .topbarLeft {
     flex: 2;
   }
+
   .topbarRight {
     flex: 1.5;
+    padding-right: 10px;
   }
 
   .topbarLink {
