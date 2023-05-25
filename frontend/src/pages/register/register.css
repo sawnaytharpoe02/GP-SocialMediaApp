@@ -1,0 +1,166 @@
+.login {
+	width: 100vw;
+	height: 100vh;
+	background-color: #f0f2f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.loginWrapper {
+	width: 70%;
+	height: 70%;
+	display: flex;
+}
+
+.loginLeft,
+.loginRight {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.loginLogo {
+	font-size: 50px;
+	font-weight: 800;
+	color: var(--link-color);
+	margin-bottom: 10px;
+}
+
+.loginDesc {
+	font-size: 24px;
+}
+
+.registerBox {
+	height: 400px;
+	padding: 25px;
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.loginInput {
+	height: 50px;
+	border-radius: 10px;
+	border: 1px solid var(--border-color);
+	font-size: 18px;
+	padding-left: 20px;
+}
+
+.loginInput:focus {
+	outline: none;
+}
+
+.loginButton {
+	height: 50px;
+	border-radius: 10px;
+	border: none;
+	background-color: #27b0b4;
+	color: white;
+	font-size: 18px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.loginRegisterButton {
+	width: 60%;
+	align-self: center;
+	height: 50px;
+	border-radius: 10px;
+	border: none;
+	background-color: #8052a1;
+	color: white;
+	font-size: 20px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+/*PC */
+@media screen and (min-width: 768px) and (max-width: 1160px) {
+	.loginLogo{
+		font-size: 40px;
+		font-weight: 800;
+	}
+
+	.loginDesc {
+		font-size: 18px;
+	}
+
+	.loginInput {
+		height: 40px;
+		font-size: 13px;
+		padding-left: 18px;
+	}
+
+	.loginButton {
+    height: 45px;
+    font-size: 17px;
+	}
+
+	.loginRegisterButton {
+    font-size: 15px;
+}
+}
+
+/*Mobile */
+@media screen and (min-width: 320px) and (max-width: 767.9px) {
+
+	.loginWrapper {
+		width: 70%;
+		height: 80%;
+		display: flex;
+		flex-direction:column;
+	}
+
+	.loginLeft{
+		flex: none;
+		width: 100%;
+		display: flex;
+		margin-bottom: 20px;
+	}
+
+	.loginRight{
+		flex: none;
+		width: 100%;
+		display: flex;
+	}
+
+	.loginLogo{
+		font-size: 40px;
+		font-weight: 800;
+	}
+
+	.loginDesc {
+		font-size: 18px;
+	}
+
+	.loginInput {
+		height: 40px;
+		font-size: 13px;
+		padding-left: 18px;
+	}
+
+	.loginRegisterButton {
+    	font-size: 14px;
+		height: 40px;
+		width: 100%;
+		padding: 10px;
+	}
+
+	.registerBox {
+		height: 350px;
+	}
+
+	.loginButton {
+		height: 35px;
+		font-size: 15px;
+	}
+
+	.loginWrapper{
+		height: 85%;
+	}
+
+}

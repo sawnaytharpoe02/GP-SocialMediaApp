@@ -1,0 +1,177 @@
+.Login {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginWrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+}
+
+.LoginLeft,
+.LoginRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LoginLogo {
+  font-size: 50px;
+  font-weight: 800;
+  color: var(--link-color);
+  margin-bottom: 10px;
+}
+
+.LoginDesc {
+  font-size: 24px;
+}
+
+.LoginBox {
+  height: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+
+.LoginInput {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.LoginInput:focus {
+  outline: none;
+}
+
+.LoginButton {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #27b0b4;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.LoginForgot {
+  text-align: center;
+  color: var(--link-color);
+  /* margin-top: 20px; */
+  cursor: pointer;
+}
+
+.LoginRegisterButton {
+  width: 60%;
+  align-self: center;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #8052a1;
+  color: var(--primary-text-color);
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1160px) {
+  .LoginLogo {
+    font-size: 40px;
+    font-weight: 800;
+  }
+
+  .LoginDesc {
+    font-size: 18px;
+  }
+
+  .LoginInput {
+    height: 40px;
+    font-size: 13px;
+    padding-left: 18px;
+  }
+
+  .LoginButton {
+    height: 45px;
+    font-size: 17px;
+  }
+
+  .LoginRegisterButton {
+    font-size: 15px;
+  }
+}
+
+/*Mobile */
+@media screen and (min-width: 320px) and (max-width: 767.9px) {
+
+  .LoginWrapper {
+    width: 70%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .LoginLeft {
+    flex: none;
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .LoginRight {
+    flex: none;
+    width: 100%;
+    display: flex;
+  }
+
+  .LoginLogo {
+    font-size: 40px;
+    font-weight: 800;
+  }
+
+  .LoginDesc {
+    font-size: 18px;
+  }
+
+  .LoginInput {
+    height: 40px;
+    font-size: 13px;
+    padding-left: 18px;
+  }
+
+  .LoginButton {
+    height: 40px;
+    font-size: 17px;
+  }
+
+  .LoginRegisterButton {
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .loginButton {
+    height: 35px;
+    font-size: 15px;
+  }
+
+  .loginWrapper {
+    height: 85%;
+  }
+
+  .LoginForgot {
+    font-size: 13px;
+  }
+}
