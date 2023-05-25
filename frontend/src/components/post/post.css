@@ -30,9 +30,9 @@
 .postProfileImg {
   width: 32px;
   height: 32px;
+  cursor: pointer;
   border-radius: 50%;
   object-fit: cover;
-  cursor: pointer;
 }
 
 .postUsername {
@@ -87,16 +87,40 @@
 
 @media screen and (min-width: 768px) and (max-width: 1160px) {
   .post {
-    margin: 10px 0;
+    margin: 1.302vw 0;
   }
 
   .postCenter {
-    margin: 10px 0;
+    margin: 1.302vw 0;
   }
 
   .likeIcon {
-    width: 22px;
-    height: 22px;
+    width: 2.865vw;
+    height: 2.865vw;
+  }
+
+  .postLikeCounter {
+    font-size: 1.953vw;
+  }
+
+  .postCommentText {
+    font-size: 1.953vw;
+  }
+}
+
+/* mobile */
+@media screen and (min-width: 320px) and (max-width: 767.9px) {
+  .post {
+    margin: 10px 0;
+  }
+
+  .postUsername {
+    font-size: 14px;
+  }
+
+  .likeIcon {
+    width: 20px;
+    height: 20px;
   }
 
   .postLikeCounter {
@@ -105,14 +129,5 @@
 
   .postCommentText {
     font-size: 15px;
-    cursor: pointer;
-    border-bottom: 1px dashed gray;
-  }
-}
-
-/* mobile */
-@media screen and (min-width: 320px) and (max-width: 767.9px) {
-  .post {
-    margin: 10px 0;
   }
 }
