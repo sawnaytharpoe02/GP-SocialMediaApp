@@ -1,7 +1,17 @@
 import './topbar.css';
-import { Search, Person, Chat, Notifications } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
+import {useNavigate} from 'react-router-dom';
 
 export default function Topbar() {
+
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate('/login');
+    window.location.reload();
+  }
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -21,7 +31,7 @@ export default function Topbar() {
           <span className="topbarLink">Timeline</span>
         </div>
         <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
-        <button class="cmnButton">Log Out</button>
+        <button onClick={logoutHandler} className="cmnButton">Log Out</button>
       </div>
     </div>
   );

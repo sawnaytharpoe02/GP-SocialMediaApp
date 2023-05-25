@@ -1,6 +1,27 @@
 import './login.css';
+import {CircularProgress} from '@mui/material';
+import { useContext, useRef } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../../context/AuthContext';
+import {loginCall} from '../../apiCall';
 
 const Login = () => {
+
+	const email = useRef();
+	const password = useRef();
+	const {data,isFetching,dispatch} = useContext(AuthContext);
+	const navigate = useNavigate();
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		loginCall({email : email.current.value,password : password.current.value},dispatch)
+	};
+	console.log(data);
+
+	const registerHandler = () => {
+		navigate('/register');
+	}
+
 	return (
 		<div className="Login">
 			<div className="LoginWrapper">
@@ -11,15 +32,17 @@ const Login = () => {
 					</span>
 				</div>
 				<div className="LoginRight">
-					<div className="LoginBox">
-						<input placeholder="Email" className="LoginInput" />
-						<input placeholder="Password" className="LoginInput" />
-						<button className="LoginButton">Log In</button>
-						<span className="LoginForgot">Forgot Password?</span>
-						<button className="LoginRegisterButton">
-							Create a New Account
+					<form className="LoginBox" onSubmit={handleClick}>
+						<input type='email' placeholder="Email" className="LoginInput" ref={email} required/>
+						<input type='password' placeholder="Password" className="LoginInput" minLength={6} ref={password} required/>
+						<button className="LoginButton" disabled={isFetching}>
+							{isFetching ? <CircularProgress color='inherit' size="30px"/> : 'Log In'}
 						</button>
-					</div>
+						<span className="LoginForgot">Forgot Password?</span>
+						<button onClick={registerHandler} type='button' className="LoginRegisterButton">
+							{isFetching ? <CircularProgress color='inherit' size="30px"/> : 'Create a New Account'}
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
-import fileUpload from 'express-fileupload';
 
 import authRoute from './routes/AuthRoute';
 import userRoute from './routes/UserRoute';
@@ -19,7 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan('common'));
 app.use(cors());
-app.use(fileUpload());
 app.use(express.static('uploads'));
 
 app.use('/api/auth', authRoute);

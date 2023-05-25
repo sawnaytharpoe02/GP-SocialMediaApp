@@ -1,6 +1,39 @@
+import { useRef } from 'react';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import './register.css';
 
 const Register = () => {
+
+	const username = useRef();
+	const email = useRef();
+	const password = useRef();
+	const passwordAgain = useRef();
+	const navigate = useNavigate();
+
+	const handleClick = async(e) => {
+		e.preventDefault();
+		if(password.current.value !== passwordAgain.current.value){
+			passwordAgain.current.setCustomValidity("Password don't match")
+		}else{
+			const user = {
+				username : username.current.value,
+				email : email.current.value,
+				password : password.current.value,
+			}
+			try {
+				await axios.post('http://localhost:3001/api/auth/register',user);
+				navigate('/login');
+			} catch (err) {
+				console.log(err.message);
+			}
+		}
+	};
+
+	const loginHandler = () => {
+		navigate('/login');
+	}
+
 	return (
 		<div className="login">
 			<div className="loginWrapper">
@@ -11,14 +44,14 @@ const Register = () => {
 					</span>
 				</div>
 				<div className="loginRight">
-					<div className="registerBox">
-						<input placeholder="Username" className="loginInput" />
-						<input placeholder="Email" className="loginInput" />
-						<input placeholder="Password" className="loginInput" />
-						<input placeholder="Password Again" className="loginInput" />
+					<form className="registerBox" onSubmit={handleClick}>
+						<input type='text' placeholder="Username" className="loginInput" ref={username} required/>
+						<input type='email' placeholder="Email" className="loginInput" ref={email} required/>
+						<input type='password' placeholder="Password" className="loginInput" ref={password} minLength={6} required/>
+						<input type='password' placeholder="Password Again" className="loginInput" ref={passwordAgain} minLength={6} required/>
 						<button className="loginButton">Sign Up</button>
-						<button className="loginRegisterButton">Log Into Account</button>
-					</div>
+						<button type='button' onClick={loginHandler} className="loginRegisterButton">Log Into Account</button>
+					</form>
 				</div>
 			</div>
 		</div>
