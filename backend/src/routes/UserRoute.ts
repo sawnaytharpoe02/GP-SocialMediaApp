@@ -5,12 +5,16 @@ import {
 	getUser,
 	followUser,
 	unfollowUser,
+	getFriendsList,
 } from '../controllers/UserController';
 import { verifyToken } from '../middleware/auth';
 const router = Router();
 
 //query a user
 router.get('/', getUser);
+
+//get user's friend lists
+router.get('/friends/:userId', getFriendsList);
 
 router
 	.route('/:id')

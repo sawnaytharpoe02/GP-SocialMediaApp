@@ -26,6 +26,22 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+   // fetch user
+   const fetchUser = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/api/users?userId=${post.userId}`
+      );
+      setUser(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchUser();
+  }, [post.userId]);
+
   // handle delete edit post
   const [showDropdown, setShowDropdown] = useState(false);
   const [open, setOpen] = useState(false);
@@ -105,15 +121,17 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
-              className="postProfileImg"
-              src={
-                user.profilePicture
-                  ? PF + user.profilePicture
-                  : PF + 'person/no_avatar.jpg'
-              }
-              alt=""
-            />
+          <Link to={`profile/${user.username}`}>
+              <img
+                className="postProfileImg"
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + 'person/no_avatar.jpg'
+                }
+                alt=""
+              />
+            </Link>
 
             <span className="postUsername">{user?.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
@@ -205,7 +223,7 @@ export default function Post({ post }) {
               onClick={likeHandler}
               alt=""
             />
-            <span className="postLikeCounter">{like} people like it</span>
+            <span className="postLikeCounter">{like} people like</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">{post?.comment} comments</span>

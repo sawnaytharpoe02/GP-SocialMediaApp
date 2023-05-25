@@ -106,4 +106,30 @@ const unfollowUser = async (req: Request, res: Response) => {
 	}
 };
 
-export { getUser, updateUser, deleteUser, followUser, unfollowUser };
+// GET FRIEND LIST
+const getFriendsList = async (req: Request, res: Response) => {
+  try {
+    const user: any = await User.findById(req.params.userId);
+    const friends = await Promise.all(
+      user.followings.map((friendId: string) => {
+        return User.findById(friendId);
+      })
+    );
+
+    let friendList: {
+      _id: String;
+      username: String;
+      profilePicture: String;
+    }[] = [];
+
+    friends.map((friend) => {
+      const { _id, username, profilePicture } = friend;
+      friendList.push({ _id, username, profilePicture });
+    });
+    res.status(200).json(friendList);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+export { getUser, updateUser, deleteUser, followUser, unfollowUser, getFriendsList };

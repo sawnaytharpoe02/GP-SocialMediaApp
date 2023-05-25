@@ -1,10 +1,14 @@
 import './topbar.css';
 import { Search } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 
 export default function Topbar() {
   const navigate = useNavigate();
+  const PF = import.meta.env.VITE_REACT_APP_PUBLIC_FOLDER;
+  const { data } = useContext(AuthContext);
 
   const logoutHandler = () => {
     localStorage.clear();
@@ -37,7 +41,17 @@ export default function Topbar() {
         <button onClick={logoutHandler} className="cmnButton">
           Log Out
         </button>
-        <img src="/assets/person/1.jpeg" alt="" className="topbarImg" />
+        <Link to={`/profile/${data?.user.username}`}>
+          <img
+            src={
+              data?.user.profilePicture
+                ? PF + data.user.profilePicture
+                : PF + 'person/no_avatar.jpg'
+            }
+            alt=""
+            className="topbarImg"
+          />
+        </Link>
       </div>
     </div>
   );
