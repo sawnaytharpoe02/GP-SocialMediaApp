@@ -101,6 +101,17 @@
   object-fit: cover;
 }
 
+.cmnButton {
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: var(--button-color);
+  font-weight: 500;
+  margin-right: 20px;
+  cursor: pointer;
+  color: white;
+}
+
 /*Ipad*/
 @media screen and (min-width: 768px) and (max-width: 1160px) {
   .searchbar {
@@ -117,7 +128,7 @@
   .cmnButton {
     padding: 7px;
     border-radius: 5px;
-    margin-right: 0px;
+    margin-right: 15px;
   }
 
   .topbarImg {

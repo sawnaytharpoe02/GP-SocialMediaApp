@@ -24,12 +24,12 @@ const Feed = ({ username }) => {
 
   useEffect(() => {
     fetchPosts();
-  }, [username, data?.user._id]);
+  }, [username, data?.user?._id]);
 
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {(!username || username === data.user.username) && <Share />}
+        {(!username || username === data.user?.username) && <Share />}
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}

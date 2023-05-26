@@ -87,7 +87,7 @@ export default function Share() {
               />
             </label>
           </div>
-          <button className="cmnButton" type="submit">
+          <button className="shareBtn" type="submit">
             Share
           </button>
         </form>

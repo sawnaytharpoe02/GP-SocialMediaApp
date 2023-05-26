@@ -36,7 +36,7 @@
 }
 
 .shareHr {
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .shareBottom {
@@ -63,13 +63,15 @@
 }
 
 .shareOptionText {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+  margin-left: 6px;
 }
 
-.cmnButton {
+.shareBtn {
   border: none;
-  padding: 7px;
+  padding: 7px 15px;
+  font-size: 16px;
   border-radius: 5px;
   background-color: var(--button-color);
   font-weight: 500;
@@ -103,7 +105,7 @@
   }
 
   .shareHr {
-    margin: 15px;
+    margin: 15px 0;
   }
 
   .shareOptions {
@@ -111,7 +113,7 @@
   }
 
   .shareOptionText {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 500;
   }
 
@@ -120,6 +122,11 @@
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+  }
+
+  .shareBtn {
+    font-size: 14px;
+    margin-right: 0;
   }
 }
 
@@ -130,6 +137,10 @@
 
   .shareOptions {
     flex-wrap: wrap;
-    gap: 5px;
+    margin-left: 0;
+  }
+
+  .shareBtn {
+    margin-right: 0;
   }
 }

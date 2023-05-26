@@ -41,11 +41,11 @@ export default function Topbar() {
         <button onClick={logoutHandler} className="cmnButton">
           Log Out
         </button>
-        <Link to={`/profile/${data?.user.username}`}>
+        <Link to={`/profile/${data?.user?.username}`}>
           <img
             src={
-              data?.user.profilePicture
-                ? PF + data.user.profilePicture
+              data?.user?.profilePicture
+                ? PF + data.user?.profilePicture
                 : PF + 'person/no_avatar.jpg'
             }
             alt=""

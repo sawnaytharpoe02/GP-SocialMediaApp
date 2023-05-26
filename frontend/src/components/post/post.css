@@ -10,7 +10,7 @@
 }
 
 .postWrapper {
-  padding: 10px;
+  padding: 12px;
 }
 
 .postTop {
@@ -29,8 +29,8 @@
 }
 
 .postProfileImg {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   border-radius: 50%;
   object-fit: cover;
@@ -130,6 +130,81 @@
   color: #d62828;
 }
 
+/* comment section */
+
+.comment_container {
+  font-size: 14px;
+}
+
+.comment_user_container {
+  display: flex;
+  gap: 1rem;
+}
+
+.comment_user_container img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment_container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid transparent;
+  border-bottom-color: var(--background-color);
+}
+
+.comment_container li button {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 2px;
+  border: 0;
+  outline: none;
+  background-color: var(--contrast-color);
+}
+
+.comment_text {
+  margin-top: 5px;
+}
+
+.deleteCommentBtn {
+  color: #f24949;
+}
+
+.submit_comment_container {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input_comment_text {
+  padding: 10px 15px;
+  flex: 1;
+  outline: none;
+  border: 0;
+  border-radius: 1.2rem;
+}
+
+.submitCommentBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  padding: 8px 15px;
+  background-color: transparent;
+  color: var(--accent-color);
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1160px) {
   .post {
     margin: 1.302vw 0;
@@ -166,10 +241,6 @@
   .likeIcon {
     width: 20px;
     height: 20px;
-  }
-
-  .postLikeCounter {
-    font-size: 15px;
   }
 
   .postCommentText {

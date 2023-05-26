@@ -10,10 +10,10 @@ import { Add, Remove } from '@mui/icons-material';
 export default function Rightbar({ user }) {
   const PF = import.meta.env.VITE_REACT_APP_PUBLIC_FOLDER;
 
-  const { data: currentUser, dispatch } = useContext(AuthContext);
+  const { data: currentUserData, dispatch } = useContext(AuthContext);
   const [friends, setFriends] = useState([]);
   const [followed, setFollowed] = useState(
-    currentUser.user.followings.includes(user?._id)
+    currentUserData.user?.followings?.includes(user?._id)
   );
 
   const getFriends = async () => {
@@ -32,16 +32,39 @@ export default function Rightbar({ user }) {
     getFriends();
   }, [user]);
 
+  const handleFollow = async () => {
+    try {
+      if (followed) {
+        await axios.put(
+          `http://localhost:3001/api/users/${user._id}/unfollow`,
+          {
+            userId: currentUserData.user._id,
+          }
+        );
+        dispatch({ type: 'UNFOLLOW', payload: user._id });
+      } else {
+        await axios.put(`http://localhost:3001/api/users/${user._id}/follow`, {
+          userId: currentUserData.user._id,
+        });
+        dispatch({ type: 'FOLLOW', payload: user._id });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setFollowed(!followed);
+  };
+
   const HomeRightbar = () => {
     return (
       <>
         <div className="birthdayContainer">
           <img className="birthdayImg" src="/assets/gift.png" alt="" />
           <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
+            <b>Linn Aung Htet</b> and <b>3 other friends</b> have a birhday
+            today.
           </span>
         </div>
-        <img className="rightbarAd" src="/assets/ad.png" alt="" />
+        <img className="rightbarAd" src="/assets/ad.jpg" alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {Users.map((u) => (
@@ -55,6 +78,12 @@ export default function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
+        {user.username !== currentUserData.user.username && (
+          <button className="rightbarFollowButton" onClick={handleFollow}>
+            {followed ? 'Unfollow' : 'Follow'}
+            {followed ? <Remove /> : <Add />}
+          </button>
+        )}
         <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
