@@ -6,31 +6,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { Add, Remove } from '@mui/icons-material';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function Rightbar({ user }) {
+export default function Rightbar({ user, friend }) {
   const PF = import.meta.env.VITE_REACT_APP_PUBLIC_FOLDER;
 
   const { data: currentUserData, dispatch } = useContext(AuthContext);
-  const [friends, setFriends] = useState([]);
+
   const [followed, setFollowed] = useState(
     currentUserData.user?.followings?.includes(user?._id)
   );
-
-  const getFriends = async () => {
-    try {
-      const friendsList = await axios.get(
-        `http://localhost:3001/api/users/friends/${user?._id}`
-      );
-
-      setFriends(friendsList.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getFriends();
-  }, [user]);
 
   const handleFollow = async () => {
     try {
@@ -42,11 +27,13 @@ export default function Rightbar({ user }) {
           }
         );
         dispatch({ type: 'UNFOLLOW', payload: user._id });
+        window.location.reload();
       } else {
         await axios.put(`http://localhost:3001/api/users/${user._id}/follow`, {
           userId: currentUserData.user._id,
         });
         dispatch({ type: 'FOLLOW', payload: user._id });
+        window.location.reload();
       }
     } catch (err) {
       console.log(err);
@@ -107,22 +94,22 @@ export default function Rightbar({ user }) {
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-          {friends.map((friend) => (
+          {friend?.map((f) => (
             <Link
-              to={`/profile/${friend.username}`}
-              key={friend._id}
+              to={`/profile/${f.username}`}
+              key={uuidv4()}
               style={{ textDecoration: 'none', color: '#fff' }}>
               <div className="rightbarFollowing">
                 <img
                   src={
-                    friend.profilePicture
-                      ? PF + friend.profilePicture
+                    f.profilePicture
+                      ? PF + f.profilePicture
                       : PF + 'person/no_avatar.jpg'
                   }
                   alt="profile_picture"
                   className="rightbarFollowingImg"
                 />
-                <span className="rightbarFollowingName">{friend.username}</span>
+                <span className="rightbarFollowingName">{f.username}</span>
               </div>
             </Link>
           ))}

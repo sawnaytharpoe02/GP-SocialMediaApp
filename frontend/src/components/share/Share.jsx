@@ -47,7 +47,7 @@ export default function Share() {
 
   return (
     <div className="share">
-      <div className="shareWrapper">
+      <form className="shareWrapper" onSubmit={handleSubmit}>
         <div className="shareTop">
           <img
             className="shareProfileImg"
@@ -64,6 +64,7 @@ export default function Share() {
             }
             className="shareInput"
             ref={desc}
+            required
           />
         </div>
         <hr className="shareHr" />
@@ -73,7 +74,7 @@ export default function Share() {
             <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
           </div>
         )}
-        <form className="shareBottom" onSubmit={handleSubmit}>
+        <div className="shareBottom">
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcon" />
@@ -90,8 +91,8 @@ export default function Share() {
           <button className="shareBtn" type="submit">
             Share
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

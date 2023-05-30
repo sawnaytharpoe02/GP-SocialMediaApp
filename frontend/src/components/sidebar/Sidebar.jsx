@@ -10,10 +10,22 @@ import {
   School,
   WorkOutline,
 } from '@mui/icons-material';
-import { Users } from '../../dummyData';
 import CloseFriend from '../closeFriend/CloseFriend';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Sidebar() {
+  const [users, setUsers] = useState();
+
+  const fetchAllUsers = async () => {
+    const response = await axios.get(`http://localhost:3001/api/users/all`);
+    setUsers(response.data.result);
+  };
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -58,9 +70,9 @@ export default function Sidebar() {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-					{Users.map((u) => (
-						<CloseFriend key={u.id} user={u} />
-					))}
+          {users?.map((u) => (
+            <CloseFriend key={u._id} user={u} />
+          ))}
         </ul>
       </div>
     </div>

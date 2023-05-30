@@ -21,7 +21,9 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.11.1",
     "react-router-dom": "^6.11.1",
-    "timeago.js": "^4.0.2"
+    "sweetalert2": "^11.7.8",
+    "timeago.js": "^4.0.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

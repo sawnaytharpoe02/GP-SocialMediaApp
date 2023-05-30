@@ -1,19 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 
-const CommentSchema = new mongoose.Schema({
-  text: {
-    type: String,
-    required: true,
+const CommentSchema = new mongoose.Schema(
+  {
+    text: {
+      type: String,
+      required: true,
+    },
+    postedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
   },
-  created: {
-    type: Date,
-    default: Date.now(),
-  },
-  postedBy: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-  },
-});
+  { timestamps: true }
+);
 
 const PostSchema = new mongoose.Schema(
   {

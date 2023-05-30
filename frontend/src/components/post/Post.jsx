@@ -11,6 +11,7 @@ import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
+import { v4 as uuidv4 } from 'uuid';
 
 // material
 import Button from '@mui/material/Button';
@@ -31,6 +32,7 @@ export default function Post({ post }) {
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser?.user._id));
   }, [currentUser?.user._id, post.likes]);
+
   const likeHandler = () => {
     try {
       axios.put(`http://localhost:3001/api/posts/${post._id}/like`, {
@@ -136,26 +138,36 @@ export default function Post({ post }) {
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    setComments(post.comments);
-  }, [post]);
+    fetchComments();
+  }, []);
+
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/posts/${post._id}/comments`
+      );
+      setComments(response.data.comments);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = {
-        text: commentText,
-        postedBy: currentUser.user._id,
-      };
       const response = await axios.post(
         `http://localhost:3001/api/posts/${post._id}/comments`,
-        data
+        {
+          text: commentText,
+          userId: currentUser.user._id,
+        }
       );
-
-      setCommentText('');
       setComments([...comments, response.data.comment]);
+      setCommentText('');
+      console.log(comments);
       window.location.reload();
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   };
 
@@ -164,13 +176,16 @@ export default function Post({ post }) {
       await axios.delete(
         `http://localhost:3001/api/posts/${post._id}/comments/${commentId}`
       );
-
       setComments(comments.filter((comment) => comment._id !== commentId));
       window.location.reload();
     } catch (err) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    setComments(post.comments);
+  }, [post]);
 
   return (
     <div className="post">
@@ -262,7 +277,11 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + post.img} alt="" />
+          <img
+            className="postImg"
+            src={PF + post?.img}
+            alt=""
+          />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
@@ -310,25 +329,32 @@ export default function Post({ post }) {
 
             {comments.length !== 0 && (
               <ul className="comment_container">
-                {comments.map((comment) => (
-                  <li key={comment._id}>
+                {comments.map((cm) => (
+                  <li key={uuidv4()}>
                     <div className="comment_user_container">
                       <img
                         src={
-                          currentUser.user.profilePicture
-                            ? PF + currentUser.user.profilePicture
+                          cm.postedBy.profilePicture
+                            ? PF + cm.postedBy.profilePicture
                             : PF + 'person/no_avatar.jpg'
                         }
                         alt=""
                       />
                       <div>
-                        <h4>{currentUser.user.username}</h4>
-                        <p className="comment_text">{comment.text}</p>
+                        <h4>
+                          {cm.postedBy.username}
+                          <span className="comment_date">
+                            {format(cm.createdAt)}
+                          </span>
+                        </h4>
+                        <p className="comment_text">{cm.text}</p>
                       </div>
                     </div>
-                    <button onClick={() => handleCommentDelete(comment._id)}>
-                      <Delete className="deleteCommentBtn" />
-                    </button>
+                    {currentUser.user._id === cm.postedBy._id && (
+                      <button onClick={() => handleCommentDelete(cm._id)}>
+                        <Delete className="deleteCommentBtn" />
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

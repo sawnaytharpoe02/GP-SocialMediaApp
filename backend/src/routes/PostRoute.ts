@@ -8,6 +8,7 @@ import {
   likeDislikePost,
   getTimelinePosts,
   comment,
+  getAllComments,
   uncomment,
 } from '../controllers/PostController';
 import { verifyToken } from '../middleware/auth';
@@ -33,6 +34,7 @@ router.get('/profile/:username', getUserPosts);
 router.get('/timeline/:userId', getTimelinePosts);
 
 //comment , uncomment
+router.get('/:postId/comments', getAllComments);
 router.post('/:postId/comments', comment);
 router.delete('/:postId/comments/:commentId', uncomment);
 

@@ -2,6 +2,16 @@ import User from '../models/User';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 
+// GET ALL USERS
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const result = await User.find();
+    res.status(200).json({ result, msg: 'Fetch All Users' });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
 // UPDATE USER
 const updateUser = async (req: Request, res: Response) => {
   let { userId, password, isAdmin } = req.body;
@@ -122,18 +132,19 @@ const getFriendsList = async (req: Request, res: Response) => {
       profilePicture: String;
     }[] = [];
 
-    friends.map((friend) => {
+    friends.map((friend: any) => {
       const { _id, username, profilePicture } = friend;
       friendList.push({ _id, username, profilePicture });
     });
     res.status(200).json(friendList);
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json(err);
   }
 };
 
 export {
   getUser,
+  getAllUsers,
   updateUser,
   deleteUser,
   followUser,

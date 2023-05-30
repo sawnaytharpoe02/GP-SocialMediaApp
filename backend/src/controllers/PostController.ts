@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
 import Post from '../models/Post';
-import { Comment, IPost } from '../interface/post';
+import { IPost } from '../interface/post';
 
 // CREATE A POST
 const createPost = async (req: Request, res: Response) => {
@@ -122,60 +122,87 @@ const getTimelinePosts = async (req: Request, res: Response) => {
   }
 };
 
-// COMMENT
+// CREATE COMMENT
 const comment = async (req: Request, res: Response) => {
-  const postId = req.params.postId;
-  const { text, postedBy } = req.body;
   try {
+    const { postId } = req.params;
+    const { text, userId } = req.body;
+
     const post = await Post.findById(postId);
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });
     }
+
     const newComment = {
       text,
-      postedBy,
+      postedBy: userId,
     };
 
     post.comments.push(newComment);
     await post.save();
 
-    res.status(201).json({ message: 'Comment added successfully' });
-  } catch (err: any) {
-    res.status(500).json({
-      message: 'An error occurred while adding the comment',
-      error: err.message,
-    });
+    res.json({ comment: newComment });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// GET ALL COMMENTS FOR A POST
+const getAllComments = async (req: Request, res: Response) => {
+  try {
+    const { postId } = req.params;
+
+    const post = await Post.findById(postId).populate(
+      'comments.postedBy',
+      'username'
+    );
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    res.json({ comments: post.comments });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
   }
 };
 
 // UNCOMMENT
 const uncomment = async (req: Request, res: Response) => {
-  const postId = req.params.postId;
-  const commentId = req.params.commentId;
   try {
+    const { postId, commentId } = req.params;
+
     const post: any = await Post.findById(postId);
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });
     }
 
     const comment = post.comments.find(
-      (comment: any) => comment._id.toString() === commentId
+      (c: any) => c._id.toString() === commentId
     );
     if (!comment) {
       return res.status(404).json({ error: 'Comment not found' });
     }
 
     post.comments = post.comments.filter(
-      (comment: any) => comment._id.toString() !== commentId
+      (c: any) => c._id.toString() !== commentId
     );
     await post.save();
 
-    res.status(200).json({ message: 'Comment deleted successfully' });
-  } catch (err: any) {
-    res.status(500).json({
-      message: 'An error occurred while deleting the comment',
-      error: err.message,
-    });
+    res.json({ message: 'Comment deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const result = await Post.find();
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -188,5 +215,6 @@ export {
   getUserPosts,
   getTimelinePosts,
   comment,
+  getAllComments,
   uncomment,
 };

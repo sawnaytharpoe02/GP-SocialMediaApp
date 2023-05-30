@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Topbar() {
   const navigate = useNavigate();
@@ -11,16 +12,27 @@ export default function Topbar() {
   const { data } = useContext(AuthContext);
 
   const logoutHandler = () => {
-    localStorage.clear();
-    navigate('/login');
-    window.location.reload();
+    Swal.fire({
+      title: 'Are you sure want to logout?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ok',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        navigate('/login');
+        window.location.reload();
+      }
+    });
   };
 
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: 'none' }}>
-          <span className="logo">Scmsocial</span>
+          <span className="logo">Connectopia</span>
         </Link>
       </div>
       <div className="topbarCenter">

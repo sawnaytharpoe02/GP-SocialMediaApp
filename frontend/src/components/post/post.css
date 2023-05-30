@@ -171,6 +171,14 @@
   margin-top: 5px;
 }
 
+.comment_date {
+  font-size: 12px;
+  margin-left: 10px;
+  font-weight: 300;
+  color: var(--secondary-text-color);
+
+}
+
 .deleteCommentBtn {
   color: #f24949;
 }
@@ -185,7 +193,7 @@
 }
 
 .input_comment_text {
-  padding: 10px 15px;
+  padding: 10px 50px 10px 15px;
   flex: 1;
   outline: none;
   border: 0;

@@ -5,6 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('/assets/vector.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .LoginWrapper {
@@ -24,29 +28,31 @@
 .LoginLogo {
   font-size: 50px;
   font-weight: 800;
-  color: var(--link-color);
+  color: #20b7bd;
   margin-bottom: 10px;
 }
 
 .LoginDesc {
   font-size: 24px;
+  color: #ececec;
 }
 
 .LoginBox {
   height: 300px;
-  padding: 20px;
-  background-color: white;
+  padding: 30px;
+  background-color: #427968;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   row-gap: 10px;
+  box-shadow: 15px 15px 15px;
 }
 
 .LoginInput {
   height: 50px;
   border-radius: 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #427968;
   font-size: 18px;
   padding-left: 20px;
 }
@@ -59,21 +65,21 @@
   height: 50px;
   border-radius: 10px;
   border: none;
-  background-color: #27b0b4;
+  background-color: #c08415;
   color: white;
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
 }
 
-.loginButton:disabled{
+.loginButton:disabled {
   cursor: not-allowed;
 }
 
 .LoginForgot {
   text-align: center;
-  color: var(--link-color);
-  /* margin-top: 20px; */
+  color: #ffff;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -83,7 +89,7 @@
   height: 50px;
   border-radius: 10px;
   border: none;
-  background-color: #8052a1;
+  background-color: #7024a7;
   color: var(--primary-text-color);
   font-size: 20px;
   font-weight: 500;
