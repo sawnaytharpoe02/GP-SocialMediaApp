@@ -112,6 +112,18 @@
   color: white;
 }
 
+.custom-confirm-button-class {
+  width: 100px;
+}
+
+.custom-cancel-button-class {
+  width: 100px;
+}
+
+.custom-title-class{
+  font-size: 20px !important;
+}
+
 /*Ipad*/
 @media screen and (min-width: 768px) and (max-width: 1160px) {
   .searchbar {

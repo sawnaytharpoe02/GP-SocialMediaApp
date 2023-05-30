@@ -18,7 +18,12 @@ export default function Topbar() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'ok',
+      confirmButtonText: 'Yes ',
+      customClass: {
+        confirmButton: 'custom-confirm-button-class',
+        cancelButton: 'custom-cancel-button-class',
+        title : 'custom-title-class'
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
