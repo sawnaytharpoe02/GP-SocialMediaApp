@@ -225,7 +225,7 @@ export default function Post({ post }) {
                   open={open}
                   className="updatePostForm"
                   onClose={handleClose}>
-                  <DialogContent>
+                  <DialogContent className="dialogContent">
                     <form onSubmit={handleEdit}>
                       <div className="updateDescText">
                         <TextField
@@ -264,7 +264,7 @@ export default function Post({ post }) {
                       </label>
                     </form>
                   </DialogContent>
-                  <DialogActions>
+                  <DialogActions className="dialogActions">
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button type="submit" onClick={handleEdit}>
                       Update
@@ -277,23 +277,13 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img
-            className="postImg"
-            src={PF + post?.img}
-            alt=""
-          />
+          <img className="postImg" src={PF + post?.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
               className="likeIcon"
               src={`${PF}like.png`}
-              onClick={likeHandler}
-              alt=""
-            />
-            <img
-              className="likeIcon"
-              src={`${PF}heart.png`}
               onClick={likeHandler}
               alt=""
             />

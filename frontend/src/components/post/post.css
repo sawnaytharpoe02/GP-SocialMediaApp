@@ -118,8 +118,39 @@
   object-fit: cover;
 }
 
+.dialogContent {
+  color: var(--primary-text-color);
+  border-radius: 0;
+}
+
+.dialogActions {
+  background-color: var(--background-color);
+}
+
 .updateDescText {
   width: 350px;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+  color: #fff !important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  background-color: var(--background-color) !important;
+}
+
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root,
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+  color: #fff !important;
+}
+
+.css-l4u8b9-MuiInputBase-root-MuiInput-root:before {
+  border-bottom-color: #fff !important;
+}
+
+.updateOptionText {
+  font-size: 14px;
+  margin-left: 10px;
 }
 
 .updateCancelImg {

@@ -1,7 +1,7 @@
 import './rightbar.css';
 import { Users } from '../../dummyData';
 import Online from '../online/Online';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
