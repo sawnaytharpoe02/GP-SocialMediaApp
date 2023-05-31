@@ -76,13 +76,6 @@
   cursor: not-allowed;
 }
 
-.LoginForgot {
-  text-align: center;
-  color: #ffff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .LoginRegisterButton {
   width: 60%;
   align-self: center;
@@ -179,9 +172,5 @@
 
   .loginWrapper {
     height: 85%;
-  }
-
-  .LoginForgot {
-    font-size: 13px;
   }
 }

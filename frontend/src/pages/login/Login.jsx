@@ -56,7 +56,6 @@ const Login = () => {
                 'Log In'
               )}
             </button>
-            <span className="LoginForgot">Forgot Password?</span>
             <button
               onClick={registerHandler}
               type="button"

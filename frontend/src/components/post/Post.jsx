@@ -106,7 +106,6 @@ export default function Post({ post }) {
       data.append('name', fileName);
       data.append('file', file);
       updatePost.img = fileName;
-      console.log(updatePost);
       try {
         await axios.post('http://localhost:3001/api/upload', data);
       } catch (err) {
@@ -139,7 +138,7 @@ export default function Post({ post }) {
 
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [comments]);
 
   const fetchComments = async () => {
     try {
@@ -164,8 +163,6 @@ export default function Post({ post }) {
       );
       setComments([...comments, response.data.comment]);
       setCommentText('');
-      console.log(comments);
-      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -177,7 +174,6 @@ export default function Post({ post }) {
         `http://localhost:3001/api/posts/${post._id}/comments/${commentId}`
       );
       setComments(comments.filter((comment) => comment._id !== commentId));
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -293,8 +289,8 @@ export default function Post({ post }) {
             <span
               className="postCommentText"
               onClick={() => setShowComments(!showComments)}>
-              {post?.comments.length !== 0
-                ? post.comments.length + 'comments'
+              {comments.length !== 0
+                ? comments.length + 'comments'
                 : 'comments'}
             </span>
           </div>
