@@ -27,18 +27,16 @@ export default function Rightbar({ user, friend }) {
           }
         );
         dispatch({ type: 'UNFOLLOW', payload: user._id });
-        window.location.reload();
       } else {
         await axios.put(`http://localhost:3001/api/users/${user._id}/follow`, {
           userId: currentUserData.user._id,
         });
         dispatch({ type: 'FOLLOW', payload: user._id });
-        window.location.reload();
       }
+      setFollowed(!followed);
     } catch (err) {
       console.log(err);
     }
-    setFollowed(!followed);
   };
 
   const HomeRightbar = () => {
@@ -67,8 +65,14 @@ export default function Rightbar({ user, friend }) {
       <>
         {user.username !== currentUserData.user.username && (
           <button className="rightbarFollowButton" onClick={handleFollow}>
-            {followed ? 'Unfollow' : 'Follow'}
-            {followed ? <Remove /> : <Add />}
+            {currentUserData.user?.followings?.includes(user?._id)
+              ? 'Unfollow'
+              : 'Follow'}
+            {currentUserData.user?.followings?.includes(user?._id) ? (
+              <Remove />
+            ) : (
+              <Add />
+            )}
           </button>
         )}
         <h4 className="rightbarTitle">User information</h4>

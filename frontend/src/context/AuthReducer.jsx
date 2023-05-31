@@ -22,18 +22,24 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         data: {
-          ...state.data.user,
-          followings: [...state.data.user.followings, action.payload],
+          ...state.data,
+          user: {
+            ...state.data.user,
+            followings: [...state.data.user.followings, action.payload],
+          },
         },
       };
     case 'UNFOLLOW':
       return {
         ...state,
         data: {
-          ...state.data.user,
-          followings: state.data.user.followings.filter(
-            (following) => following !== action.payload
-          ),
+          ...state.data,
+          user: {
+            ...state.data.user,
+            followings: state.data.user.followings.filter(
+              (following) => following !== action.payload
+            ),
+          },
         },
       };
     default:
